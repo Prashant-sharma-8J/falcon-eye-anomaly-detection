@@ -1690,6 +1690,425 @@ body.screen-shake-anim {
 }
 
 /* ==========================================================================
+   MOBILE COMMAND CENTER REFINEMENT
+   ========================================================================== */
+@media (max-width: 768px) {
+    body {
+        overflow: hidden;
+        height: 100dvh;
+    }
+
+    .app-container {
+        height: 100dvh;
+        display: block;
+    }
+
+    .main-content {
+        height: 100dvh;
+        width: 100%;
+        padding: 18px 14px 104px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .sidebar {
+        position: fixed;
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        z-index: 100;
+        width: auto;
+        height: 72px;
+        padding: 8px;
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        box-shadow: 0 18px 44px rgba(0, 0, 0, 0.22);
+        background: rgba(4, 7, 17, 0.82);
+    }
+
+    body:not(.dark-mode) .sidebar {
+        background: rgba(255, 255, 255, 0.86);
+        box-shadow: 0 18px 44px rgba(10, 37, 64, 0.14);
+    }
+
+    .sidebar-brand-wrapper,
+    .sidebar-status-panel,
+    .sidebar-footer {
+        display: none !important;
+    }
+
+    .sidebar-nav {
+        height: 100%;
+        flex-direction: row;
+        align-items: stretch;
+        justify-content: space-between;
+        gap: 4px;
+    }
+
+    .nav-btn {
+        flex: 1;
+        min-width: 0;
+        height: 56px;
+        justify-content: center;
+        flex-direction: column;
+        gap: 4px;
+        padding: 7px 4px;
+        border-radius: 14px;
+        font-size: 10px;
+        line-height: 1.05;
+        text-align: center;
+        white-space: normal;
+        letter-spacing: 0;
+    }
+
+    .nav-btn::before {
+        display: none;
+    }
+
+    .nav-btn svg {
+        width: 19px;
+        height: 19px;
+        margin: 0;
+    }
+
+    .content-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 14px;
+        margin-bottom: 20px;
+    }
+
+    .header-title {
+        width: 100%;
+    }
+
+    .header-title h2 {
+        font-size: 22px;
+        line-height: 1.12;
+        letter-spacing: 0;
+    }
+
+    .header-title p {
+        font-size: 13px;
+        line-height: 1.45;
+        max-width: 34rem;
+    }
+
+    .header-actions {
+        width: 100%;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        min-height: 42px;
+        justify-content: center;
+    }
+
+    .kpi-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin-bottom: 18px;
+    }
+
+    .kpi-card {
+        min-height: 128px;
+        padding: 16px;
+        flex-direction: column;
+        gap: 12px;
+        border-radius: 14px;
+    }
+
+    .kpi-icon-wrapper {
+        width: 36px;
+        height: 36px;
+    }
+
+    .kpi-value {
+        font-size: 22px;
+        letter-spacing: 0;
+        overflow-wrap: anywhere;
+    }
+
+    .kpi-title {
+        font-size: 10px;
+        letter-spacing: 0.4px;
+    }
+
+    .kpi-meta {
+        font-size: 11px;
+        line-height: 1.25;
+    }
+
+    .charts-row,
+    .simulator-layout {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        margin-bottom: 18px;
+    }
+
+    .chart-container-wrapper,
+    .live-alerts-section,
+    .simulator-form,
+    .simulator-results-panel,
+    .global-thresholds-panel,
+    .user-thresholds-table-wrapper,
+    .theory-intro-card,
+    .theory-step-card {
+        padding: 18px;
+        border-radius: 14px;
+    }
+
+    .chart-header,
+    .section-title-wrapper,
+    .table-actions-header,
+    .report-header,
+    .reconstruction-error-viz-box,
+    .table-filter-section {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .chart-legend {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    #chart-anomaly-trend {
+        height: 260px !important;
+        max-height: 260px;
+    }
+
+    .donut-chart-box {
+        height: 240px;
+    }
+
+    .donut-num {
+        font-size: 26px;
+    }
+
+    .live-alerts-section {
+        margin-bottom: 8px;
+    }
+
+    .alert-banner {
+        align-items: flex-start;
+        gap: 12px;
+        padding: 14px;
+    }
+
+    .alert-badge-icon {
+        margin-right: 0;
+    }
+
+    .alert-value-score {
+        align-items: flex-start;
+        margin-left: 44px;
+    }
+
+    .search-wrapper,
+    .search-input {
+        max-width: none !important;
+        width: 100%;
+    }
+
+    .table-scroll-container {
+        border-radius: 14px;
+        padding: 0;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .transaction-table {
+        min-width: 760px;
+        font-size: 12.5px;
+    }
+
+    .transaction-table th,
+    .transaction-table td {
+        padding: 12px 14px;
+    }
+
+    .simulator-results-panel {
+        min-height: 360px;
+    }
+
+    .simulator-form-title,
+    .report-header h4,
+    .global-thresholds-panel h3,
+    .table-actions-header h3,
+    .section-title-wrapper h3 {
+        font-size: 16px;
+        line-height: 1.25;
+    }
+
+    .reconstruction-error-viz-box {
+        width: 100%;
+    }
+
+    .metric-divider {
+        display: none;
+    }
+
+    .metric-block {
+        width: 100%;
+    }
+
+    .metric-block .val,
+    .param-val {
+        font-size: 24px;
+    }
+
+    .progress-bar-labels {
+        flex-direction: column;
+        gap: 4px;
+        font-size: 12px;
+    }
+
+    .report-details-grid,
+    .parameter-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .detail-cell[style*="grid-column"] {
+        grid-column: auto !important;
+    }
+
+    .param-card {
+        padding: 16px;
+    }
+}
+
+@media (max-width: 520px) {
+    .main-content {
+        padding: 16px 12px 98px;
+    }
+
+    .sidebar {
+        left: 8px;
+        right: 8px;
+        bottom: 8px;
+        height: 66px;
+        border-radius: 18px;
+    }
+
+    .nav-btn {
+        height: 50px;
+        font-size: 9px;
+        border-radius: 12px;
+    }
+
+    .nav-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .header-title h2 {
+        font-size: 20px;
+    }
+
+    .live-indicator-badge {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .header-actions .btn,
+    #btn-trigger-simulator-shortcut {
+        width: 100%;
+    }
+
+    .kpi-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .kpi-card {
+        min-height: 0;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .chart-container-wrapper,
+    .live-alerts-section,
+    .simulator-form,
+    .simulator-results-panel,
+    .global-thresholds-panel,
+    .user-thresholds-table-wrapper {
+        padding: 16px;
+    }
+
+    #chart-anomaly-trend {
+        height: 220px !important;
+        max-height: 220px;
+    }
+
+    .donut-chart-box {
+        height: 210px;
+    }
+
+    .risk-badge {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        border-radius: 12px;
+    }
+
+    .landing-page {
+        overflow-y: auto;
+        height: 100dvh;
+    }
+
+    .landing-header {
+        padding: 18px 20px;
+    }
+
+    .landing-hero {
+        padding: 14px 20px 28px;
+        gap: 28px;
+    }
+
+    .animated-title {
+        font-size: 34px;
+        line-height: 1.06;
+        gap: 8px 10px;
+        letter-spacing: 0;
+    }
+
+    .hero-subtext {
+        font-size: 15px;
+        margin-bottom: 24px;
+    }
+
+    .hero-ctas {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .hero-ctas .btn {
+        width: 100%;
+    }
+
+    .preview-glass-card {
+        height: auto;
+        min-height: 300px;
+        padding: 22px;
+        border-radius: 20px;
+    }
+
+    .telemetry-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .telemetry-item[style*="grid-column"] {
+        grid-column: auto !important;
+    }
+}
+
+/* ==========================================================================
    HOW IT WORKS — DEEP LEARNING THEORY PAGE STYLES
    ========================================================================== */
 .theory-layout {
@@ -2146,4 +2565,3 @@ body.dark-mode .role-badge.active {
     border-color: rgba(223, 27, 65, 0.2);
     transform: translateY(-1px);
 }
-
