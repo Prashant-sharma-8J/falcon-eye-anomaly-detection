@@ -2320,6 +2320,161 @@ body.dark-mode .architecture-container {
     transform: translateX(-50%);
 }
 
+@media (max-width: 768px) {
+    #pane-theory {
+        overflow-x: hidden;
+    }
+
+    #pane-theory .theory-layout {
+        gap: 16px;
+        width: 100%;
+        min-width: 0;
+    }
+
+    #pane-theory .theory-intro-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 20px;
+        border-radius: 16px;
+    }
+
+    #pane-theory .intro-icon-box {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+    }
+
+    #pane-theory .intro-text,
+    #pane-theory .step-content {
+        width: 100%;
+        min-width: 0;
+    }
+
+    #pane-theory .intro-text h3 {
+        font-size: 22px;
+        line-height: 1.2;
+        letter-spacing: 0;
+        margin-bottom: 10px;
+    }
+
+    #pane-theory .intro-text p {
+        font-size: 14px;
+        line-height: 1.62;
+    }
+
+    #pane-theory .theory-spec-grid,
+    #pane-theory .theory-split-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        width: 100%;
+        min-width: 0;
+    }
+
+    #pane-theory .spec-card,
+    #pane-theory .timeline-step,
+    #pane-theory .theory-architecture-panel {
+        width: 100%;
+        min-width: 0;
+        padding: 18px;
+        border-radius: 16px;
+    }
+
+    #pane-theory .spec-val {
+        font-size: 24px;
+        line-height: 1.15;
+        overflow-wrap: anywhere;
+    }
+
+    #pane-theory .spec-lbl {
+        letter-spacing: 0.5px;
+    }
+
+    #pane-theory .timeline-step {
+        gap: 14px;
+        border-left-width: 0;
+        border-top: 3px solid var(--border-color);
+    }
+
+    #pane-theory .timeline-step:hover {
+        transform: none;
+        border-top-color: var(--brand-primary);
+    }
+
+    #pane-theory .step-number {
+        width: 34px;
+        height: 34px;
+        font-size: 15px;
+    }
+
+    #pane-theory .step-content h4 {
+        font-size: 18px;
+        line-height: 1.25;
+        margin-bottom: 8px;
+    }
+
+    #pane-theory .step-content p {
+        font-size: 14px;
+        line-height: 1.56;
+    }
+
+    #pane-theory .theory-architecture-panel h4 {
+        font-size: 18px;
+        line-height: 1.25;
+        margin-bottom: 14px;
+    }
+
+    #pane-theory .architecture-container {
+        padding: 12px;
+        overflow: hidden;
+    }
+
+    #pane-theory .neural-network-svg {
+        width: 100%;
+        max-height: 190px;
+    }
+
+    #pane-theory .architecture-legend {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 4px;
+        height: auto;
+        margin-top: 10px;
+        padding-top: 10px;
+    }
+
+    #pane-theory .arch-lbl {
+        position: static;
+        transform: none;
+        text-align: center;
+        font-size: 8px;
+        line-height: 1.2;
+        letter-spacing: 0;
+        overflow-wrap: anywhere;
+    }
+}
+
+@media (max-width: 520px) {
+    #pane-theory .theory-intro-card,
+    #pane-theory .spec-card,
+    #pane-theory .timeline-step,
+    #pane-theory .theory-architecture-panel {
+        padding: 16px;
+    }
+
+    #pane-theory .intro-text h3 {
+        font-size: 20px;
+    }
+
+    #pane-theory .timeline-step {
+        flex-direction: column;
+    }
+
+    #pane-theory .neural-network-svg {
+        max-height: 160px;
+    }
+}
+
 /* ==========================================================================
    ROLE-BASED LOGIN & SIMULATOR LOCK SCREEN STYLES
    ========================================================================== */
