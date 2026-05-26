@@ -544,40 +544,34 @@ document.addEventListener('DOMContentLoaded', () => {
         // Sleek Donut Chart with Rich Gradients & Transparency
         const riskCtx = document.getElementById('chart-risk-distribution').getContext('2d');
         
-        // Define beautiful modern semi-transparent gradients
-        const gradSecure = riskCtx.createLinearGradient(0, 0, 0, 320);
-        gradSecure.addColorStop(0, 'rgba(16, 185, 129, 0.12)'); // Transparent Emerald Green
-        gradSecure.addColorStop(1, 'rgba(16, 185, 129, 0.45)');
-        
+        // Threat severity colors mirror the dashboard badges: amber, orange, crimson.
         const gradSuspicious = riskCtx.createLinearGradient(0, 0, 0, 320);
-        gradSuspicious.addColorStop(0, 'rgba(99, 102, 241, 0.12)'); // Transparent Indigo Blue
-        gradSuspicious.addColorStop(1, 'rgba(99, 102, 241, 0.45)');
+        gradSuspicious.addColorStop(0, 'rgba(217, 119, 6, 0.12)');
+        gradSuspicious.addColorStop(1, 'rgba(217, 119, 6, 0.45)');
         
         const gradAnomaly = riskCtx.createLinearGradient(0, 0, 0, 320);
         gradAnomaly.addColorStop(0, 'rgba(245, 158, 11, 0.12)');  // Transparent Amber Gold
         gradAnomaly.addColorStop(1, 'rgba(245, 158, 11, 0.45)');
         
         const gradThreat = riskCtx.createLinearGradient(0, 0, 0, 320);
-        gradThreat.addColorStop(0, 'rgba(255, 42, 95, 0.12)');   // Transparent Crimson Red
-        gradThreat.addColorStop(1, 'rgba(255, 42, 95, 0.45)');
+        gradThreat.addColorStop(0, 'rgba(223, 27, 65, 0.12)');   // Transparent Crimson Red
+        gradThreat.addColorStop(1, 'rgba(223, 27, 65, 0.45)');
 
         STATE.charts.risk = new Chart(riskCtx, {
             type: 'doughnut',
             data: {
-                labels: ['Secure Inbound', 'Medium Suspicion', 'High Anomaly', 'Critical Threat'],
+                labels: ['Elevated Threat', 'High Threat', 'Critical Threat'],
                 datasets: [{
-                    data: [76, 12, 8, 4],
+                    data: [0, 0, 0],
                     backgroundColor: [
-                        gradSecure,
-                        gradSuspicious,
                         gradAnomaly,
+                        gradSuspicious,
                         gradThreat
                     ],
                     borderColor: [
-                        '#10b981',
-                        '#6366f1',
                         '#f59e0b',
-                        '#ff2a5f'
+                        '#d97706',
+                        '#df1b41'
                     ],
                     borderWidth: 2,
                     hoverOffset: 6
@@ -645,26 +639,40 @@ document.addEventListener('DOMContentLoaded', () => {
         STATE.charts.trend.data.datasets[1].data = anomalyCounts;
         STATE.charts.trend.update();
 
-        // Compute risk levels distribution
-        let low = 0, med = 0, high = 0, crit = 0;
-        txnData.forEach(t => {
-            const score = t.error_score || 0.1;
-            const threshold = 1.1;
-            if (t.is_anomaly || score > threshold) {
-                if (score > threshold * 2.0) crit++;
-                else high++;
-            } else {
-                if (score > threshold * 0.45) med++;
-                else low++;
-            }
+        const totalThreats = Number(STATE.stats.total_anomalies) || anomalyData.length || 0;
+        const threatRows = anomalyData.length
+            ? anomalyData
+            : txnData.filter(t => Number(t.is_anomaly) === 1);
+        const buckets = buildThreatSeverityBuckets(threatRows, totalThreats);
+
+        STATE.charts.risk.data.datasets[0].data = buckets;
+        STATE.charts.risk.update();
+    }
+
+    function buildThreatSeverityBuckets(threatRows, totalThreats) {
+        if (!totalThreats) return [0, 0, 0];
+        if (!threatRows.length) return [0, 0, totalThreats];
+
+        const sorted = [...threatRows].sort((a, b) => (Number(b.error_score) || 0) - (Number(a.error_score) || 0));
+        const sampleTotal = sorted.length;
+        let elevated = 0;
+        let high = 0;
+        let critical = 0;
+
+        sorted.forEach((_, index) => {
+            const rank = (index + 1) / sampleTotal;
+            if (rank <= 0.2) critical++;
+            else if (rank <= 0.55) high++;
+            else elevated++;
         });
 
-        if (low === 0 && med === 0 && high === 0 && crit === 0) {
-            low = 78; med = 14; high = 8; crit = 4;
-        }
+        if (sampleTotal === totalThreats) return [elevated, high, critical];
 
-        STATE.charts.risk.data.datasets[0].data = [low, med, high, crit];
-        STATE.charts.risk.update();
+        const scale = totalThreats / sampleTotal;
+        const scaled = [elevated, high, critical].map(value => Math.round(value * scale));
+        const drift = totalThreats - scaled.reduce((sum, value) => sum + value, 0);
+        scaled[2] += drift;
+        return scaled;
     }
 
     // ==========================================================================
@@ -724,7 +732,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 return true;
             });
             
-            const anomaliesRes = await fetch('/api/anomalies?limit=30');
+            const anomalyLimit = Math.max(Number(STATE.stats.total_anomalies) || 50, 50);
+            const anomaliesRes = await fetch(`/api/anomalies?limit=${anomalyLimit}`);
             const rawAnomalies = await anomaliesRes.json();
             
             const seenAnoms = new Set();
@@ -1811,15 +1820,13 @@ document.addEventListener('DOMContentLoaded', () => {
         STATE.charts.trend.update();
         
         STATE.charts.risk.data.datasets[0].borderColor = isDark ? [
-            'rgba(16, 185, 129, 0.85)',
-            'rgba(99, 102, 241, 0.85)',
             'rgba(245, 158, 11, 0.85)',
-            'rgba(255, 42, 95, 0.85)'
+            'rgba(217, 119, 6, 0.85)',
+            'rgba(223, 27, 65, 0.85)'
         ] : [
-            '#10b981',
-            '#6366f1',
             '#f59e0b',
-            '#ff2a5f'
+            '#d97706',
+            '#df1b41'
         ];
         STATE.charts.risk.data.datasets[0].borderWidth = 2;
         STATE.charts.risk.update();
