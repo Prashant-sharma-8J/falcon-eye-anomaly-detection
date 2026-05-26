@@ -1,5 +1,6 @@
 import logging
 import warnings
+import time
 # Suppress pandas SQL Connection UserWarnings to keep the CLI clean
 warnings.filterwarnings("ignore", category=UserWarning)
 
@@ -31,26 +32,40 @@ def score_all():
             return
             
         scoring_service = ScoringService()
-        logger.info("Loaded model and starting batch scoring pipeline...")
+        logger.info("Loaded model and starting resilient batch scoring pipeline...")
         
-        # Process and write results
-        for idx, txn_id in enumerate(txn_ids):
-            try:
-                # Score the individual transaction through the TensorFlow Autoencoder
-                res = scoring_service.score_transaction(txn_id)
-                # Persist the anomaly result back into the anomalies database table
-                mark_anomaly(conn, txn_id, res["error_score"], res["is_anomaly"])
-            except Exception as e:
-                logger.error("Failed to score txn_id=%s: %s", txn_id, e)
-                
-            if (idx + 1) % 100 == 0 or idx + 1 == total:
-                logger.info("Scored and logged %s/%s transactions...", idx + 1, total)
-                conn.commit()  # Batch commit for performance and transactional safety
-                
-        logger.info("Batch scoring pipeline completed! 100%% of historical transactions are now scored.")
-    finally:
+        # Close search cursor and connection to refresh for loop
         cursor.close()
         conn.close()
+        
+        # Process in chunks with fresh connections to avoid idle timeouts and limits
+        for idx, txn_id in enumerate(txn_ids):
+            retry_count = 3
+            success = False
+            while retry_count > 0 and not success:
+                try:
+                    conn = get_connection()
+                    try:
+                        res = scoring_service.score_transaction(txn_id)
+                        mark_anomaly(conn, txn_id, res["error_score"], res["is_anomaly"])
+                        success = True
+                    finally:
+                        conn.close()
+                except Exception as e:
+                    retry_count -= 1
+                    logger.error("Error scoring txn_id=%s, retries left=%s: %s", txn_id, retry_count, e)
+                    if retry_count > 0:
+                        time.sleep(1)
+                    else:
+                        logger.critical("Failed to score txn_id=%s completely.", txn_id)
+                
+            if (idx + 1) % 50 == 0 or idx + 1 == total:
+                logger.info("Scored and logged %s/%s transactions...", idx + 1, total)
+                
+        logger.info("Batch scoring pipeline completed! 100%% of historical transactions are now scored.")
+    except Exception as e:
+        logger.critical("Global failure in historical scoring script: %s", e)
 
 if __name__ == "__main__":
     score_all()
+
