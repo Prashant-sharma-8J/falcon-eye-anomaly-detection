@@ -1186,6 +1186,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         };
                     } else {
                         result = await scoreRes.json();
+                        if (result.simulated && result.fallback_reason) {
+                            console.warn('Autoencoder scoring fallback:', result.fallback_reason);
+                        }
                     }
                     
                     if (result.is_anomaly) triggerScreenShakeFlash();
@@ -1227,7 +1230,13 @@ document.addEventListener('DOMContentLoaded', () => {
             elements.reportChannel.innerText = result.channel;
             elements.reportScoreVal.innerText = result.error_score.toFixed(4);
             elements.reportThresholdVal.innerText = result.threshold.toFixed(4);
-            elements.reportThresholdType.innerText = result.threshold_source === 'user' ? 'USER SPECIFIC ENVELOPE' : 'GLOBAL DEFAULT THRESHOLD';
+            if (result.simulated) {
+                elements.reportThresholdType.innerText = 'SANDBOX FALLBACK';
+            } else if (result.evaluation_source === 'autoencoder') {
+                elements.reportThresholdType.innerText = result.threshold_source === 'user' ? 'AUTOENCODER USER ENVELOPE' : 'AUTOENCODER GLOBAL ENVELOPE';
+            } else {
+                elements.reportThresholdType.innerText = result.threshold_source === 'user' ? 'USER SPECIFIC ENVELOPE' : 'GLOBAL DEFAULT THRESHOLD';
+            }
 
             const ratio = Math.min((result.error_score / result.threshold) * 100, 100);
             elements.reportRatioVal.innerText = `${(result.error_score / result.threshold * 100).toFixed(1)}% of Threshold`;

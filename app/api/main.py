@@ -2,6 +2,7 @@ import os
 import json
 import random
 import warnings
+import logging
 # Suppress pandas SQL Connection UserWarnings to keep the FastAPI server logs clean
 warnings.filterwarnings("ignore", category=UserWarning)
 
@@ -30,6 +31,7 @@ from app.workers.anomaly_worker import main_loop
 
 
 app = FastAPI(title="FalconEye Anomaly Detection API", version="1.0.0")
+logger = logging.getLogger("falconeye.api")
 
 
 @app.on_event("startup")
@@ -201,8 +203,11 @@ def score_transaction_endpoint(txn_id: int):
             mark_anomaly(conn, txn_id, result["error_score"], result["is_anomaly"])
         finally:
             conn.close()
+        result["simulated"] = False
+        result["evaluation_source"] = "autoencoder"
         return result
-    except Exception:
+    except Exception as exc:
+        logger.warning("Autoencoder scoring failed for txn_id=%s; using simulated fallback: %s", txn_id, exc)
         # Fallback to simulated score calculation using the local autoencoder models if possible
         # Find the transaction in MOCK_TRANSACTIONS
         txn = next((t for t in MOCK_TRANSACTIONS if t["txn_id"] == txn_id), None)
@@ -255,7 +260,9 @@ def score_transaction_endpoint(txn_id: int):
             "threshold": round(threshold, 4),
             "threshold_source": "user" if user_id <= 30 else "global",
             "is_anomaly": is_anomaly,
-            "simulated": True
+            "simulated": True,
+            "evaluation_source": "simulated_fallback",
+            "fallback_reason": str(exc)
         }
 
 
@@ -353,4 +360,3 @@ def serve_index():
     if os.path.exists(index_path):
         return FileResponse(index_path)
     return {"message": "FalconEye Anomaly Detector API. Static frontend is not yet created inside app/static."}
-
