@@ -1,10 +1,13 @@
 import os
 from dataclasses import dataclass
+from pathlib import Path
 
 from dotenv import load_dotenv
 
 
 load_dotenv()
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
 
 @dataclass(frozen=True)
@@ -21,15 +24,22 @@ class Settings:
 
     @property
     def model_path(self) -> str:
-        return os.path.join(self.model_dir, "autoencoder.keras")
+        return str(self._model_dir_path / "autoencoder.keras")
 
     @property
     def scaler_path(self) -> str:
-        return os.path.join(self.model_dir, "scaler.npy")
+        return str(self._model_dir_path / "scaler.npy")
 
     @property
     def threshold_path(self) -> str:
-        return os.path.join(self.model_dir, "threshold.json")
+        return str(self._model_dir_path / "threshold.json")
+
+    @property
+    def _model_dir_path(self) -> Path:
+        path = Path(self.model_dir)
+        if path.is_absolute():
+            return path
+        return PROJECT_ROOT / path
 
     @property
     def db_config(self) -> dict:

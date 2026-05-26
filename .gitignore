@@ -9,6 +9,7 @@ tfenv/
 *.h5
 *.keras
 *.ckpt
+!models/autoencoder.keras
 
 
 
