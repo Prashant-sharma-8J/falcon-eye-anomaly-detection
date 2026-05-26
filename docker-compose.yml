@@ -1,0 +1,54 @@
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: .
+    environment:
+      DB_HOST: mysql
+      DB_USER: root
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      THRESHOLD_K: "3.0"
+      MIN_USER_THRESHOLD_SAMPLES: "10"
+    ports:
+      - "8000:8000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    volumes:
+      - ./models:/app/models
+      - ./app:/app/app
+
+  worker:
+    build: .
+    command: ["python", "worker.py"]
+    environment:
+      DB_HOST: mysql
+      DB_USER: root
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      THRESHOLD_K: "3.0"
+      MIN_USER_THRESHOLD_SAMPLES: "10"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    volumes:
+      - ./models:/app/models
+      - ./app:/app/app
+
+volumes:
+  mysql_data:

@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FalconEye — Banking Anomaly Detector</title>
+    
+    <!-- SEO Optimization -->
+    <meta name="description" content="FalconEye is an advanced real-time financial transaction anomaly detector powered by TensorFlow Autoencoders, featuring premium glassmorphism dashboards and interactive fluid analytics.">
+    <meta name="keywords" content="anomaly detection, fraud detection, machine learning, banking security, financial transactions, glassmorphism, real-time analytics">
+    
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/static/style.css">
+    
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- Canvas Fluid Background -->
+    <canvas id="bg-canvas"></canvas>
+    <canvas id="fluid-canvas"></canvas>
+
+    <!-- Premium Landing/Cover Page (Dribbble-Inspired) -->
+    <div class="landing-page" id="landing-page">
+        <!-- Landing Header -->
+        <header class="landing-header">
+            <div class="landing-brand">
+                <div class="brand-icon-wrapper" style="margin-right: 8px;">
+                    <!-- Falcon Eye Logo Image -->
+                    <img class="brand-logo" src="/static/falconeye_Logo.png" alt="FalconEye Logo">
+                </div>
+                <h1 style="font-family: var(--font-heading); font-size: 20px; font-weight: 700; color: var(--color-text-heading); letter-spacing: -0.5px;">FalconEye</h1>
+            </div>
+            
+            <nav class="landing-nav">
+                <a class="landing-nav-link" id="nav-landing-telemetry">Telemetry</a>
+                <a class="landing-nav-link" id="nav-landing-features">Features</a>
+                <a class="landing-nav-link" id="nav-landing-sandbox">Sandbox</a>
+                <button class="btn btn-primary" id="btn-landing-launch" style="padding: 10px 20px; font-size: 13px; border-radius: 6px; box-shadow: var(--shadow-sm); cursor: pointer;">
+                    Launch Threat Center &rarr;
+                </button>
+            </nav>
+        </header>
+
+        <!-- Landing Hero Section -->
+        <main class="landing-hero">
+            <!-- Left Side Content -->
+            <div class="hero-left">
+                <div class="hero-tag">Active Security Telemetry</div>
+                <h2 class="animated-title">Modern payment security for forward-thinking systems</h2>
+                <p class="hero-subtext">FalconEye operates sub-millisecond TensorFlow Autoencoder models to screen transactions for reconstruction anomalies, safeguarding ledger balances with dynamic thresholds.</p>
+                <div class="hero-ctas">
+                    <button class="btn btn-primary btn-large" id="btn-hero-enter" style="cursor: pointer;">
+                        Access Threat Center
+                        <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </button>
+                    <button class="btn btn-secondary btn-large" id="btn-hero-learn" style="background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(5px); cursor: pointer;">
+                        Explore Features
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Side Telemetry Glass Panel Preview -->
+            <div class="hero-right">
+                <div class="preview-glass-card">
+                    <!-- Dynamic Glowing Shape Behind SVG -->
+                    <div class="preview-shape-container">
+                        <svg class="preview-shape" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+                            <g filter="url(#glass-glow-landing)">
+                                <rect x="40" y="40" width="120" height="120" rx="30" fill="url(#glass-grad-landing)" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+                                <rect x="75" y="75" width="50" height="50" rx="15" fill="url(#glass-inner-grad-landing)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+                            </g>
+                            <circle cx="150" cy="50" r="10" fill="url(#sphere-grad-landing)" filter="url(#sphere-glow-landing)"/>
+                            <defs>
+                                <linearGradient id="glass-grad-landing" x1="40" y1="40" x2="160" y2="160" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="rgba(255, 255, 255, 0.12)"/>
+                                    <stop offset="1" stop-color="rgba(255, 255, 255, 0.01)"/>
+                                </linearGradient>
+                                <linearGradient id="glass-inner-grad-landing" x1="75" y1="75" x2="125" y2="125" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="rgba(6, 182, 212, 0.3)"/>
+                                    <stop offset="1" stop-color="rgba(37, 99, 235, 0.05)"/>
+                                </linearGradient>
+                                <linearGradient id="sphere-grad-landing" x1="140" y1="40" x2="160" y2="60" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#ffffff"/>
+                                    <stop offset="1" stop-color="#2563eb"/>
+                                </linearGradient>
+                                <filter id="glass-glow-landing" x="0" y="0" width="200" height="200" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feDropShadow dx="0" dy="15" stdDeviation="20" flood-color="rgba(37, 99, 235, 0.15)"/>
+                                </filter>
+                                <filter id="sphere-glow-landing" x="130" y="30" width="40" height="40" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feGaussianBlur stdDeviation="3" result="blur"/>
+                                    <feMerge>
+                                        <feMergeNode in="blur"/>
+                                        <feMergeNode in="SourceGraphic"/>
+                                    </feMerge>
+                                </filter>
+                            </defs>
+                        </svg>
+                    </div>
+
+                    <!-- Telemetry Stats Overlay -->
+                    <div class="telemetry-grid">
+                        <div class="telemetry-item">
+                            <span class="telemetry-lbl">Total Inbound Flow</span>
+                            <span class="telemetry-val" style="color: var(--color-info); font-size: 28px;">$162,240.00</span>
+                        </div>
+                        <div class="telemetry-item">
+                            <span class="telemetry-lbl">Total Outbound Flow</span>
+                            <span class="telemetry-val" style="color: var(--brand-primary); font-size: 28px;">$112,120.20</span>
+                        </div>
+                        <div class="telemetry-item" style="grid-column: span 2;">
+                            <span class="telemetry-lbl">Threat Scoring Accuracy</span>
+                            <span class="telemetry-val" style="color: var(--color-success); font-size: 28px;">96.4% Accuracy</span>
+                        </div>
+                    </div>
+
+                    <!-- Subtle Brand Footnote -->
+                    <div class="telemetry-footer" style="font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.3); z-index: 5;">
+                        <span>&copy; FalconEye Ingestion Node #0412</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Premium Authentication Screen -->
+    <div class="login-screen hidden" id="login-screen">
+        <div class="login-card glass">
+            <div class="login-header">
+                <div class="login-logo-wrapper" style="width: 90px; height: 90px; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); border: 1.5px solid rgba(255, 255, 255, 0.25); border-radius: 16px; display: flex; align-items: center; justify-content: center; overflow: hidden; margin: 0 auto 16px auto; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);">
+                    <img class="login-logo" src="/static/falconeye_Logo.png" alt="FalconEye Logo" style="width: 100%; height: 100%; object-fit: contain; transform: scale(1.4); mix-blend-mode: multiply;">
+                </div>
+                <h2 style="margin-top: 8px;">Operator Authentication</h2>
+                <p>Verify security clearance to access neural threat metrics</p>
+            </div>
+            
+            <div class="login-badge-selector">
+                <label class="input-label">Select Clearance Role:</label>
+                <div class="badge-row">
+                    <button class="role-badge" id="badge-visitor" type="button" data-username="visitor" data-password="visitor123">
+                        <span class="badge-role">Visitor</span>
+                        <span class="badge-desc">View-Only Dashboard</span>
+                    </button>
+                    <button class="role-badge" id="badge-admin" type="button">
+                        <span class="badge-role">Admin</span>
+                        <span class="badge-desc">Type Pass Manually</span>
+                    </button>
+                </div>
+            </div>
+
+            <form class="login-form" id="login-form">
+                <div class="form-group">
+                    <label class="input-label" for="login-username">Operator Username</label>
+                    <input type="text" id="login-username" class="form-input" placeholder="Enter username..." required autocomplete="username">
+                </div>
+                
+                <div class="form-group">
+                    <label class="input-label" for="login-password">Security Password</label>
+                    <input type="password" id="login-password" class="form-input" placeholder="Enter password..." required autocomplete="current-password">
+                </div>
+
+                <div class="error-message hidden" id="login-error-msg">
+                    Invalid operator credentials. Please try again.
+                </div>
+
+                <button type="submit" class="btn btn-primary w-full" id="btn-submit-login">
+                    Authenticate Securely
+                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 6px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+            </form>
+            
+            <div class="login-footer">
+                <a id="btn-login-back" style="cursor: pointer;">&larr; Back to Portal Overview</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="app-container hidden" id="main-app">
+        
+        <!-- Premium Sidebar Nav -->
+        <aside class="sidebar glass" id="app-sidebar">
+            <div class="sidebar-brand-wrapper">
+                <div class="sidebar-brand">
+                    <div class="brand-icon-wrapper">
+                        <!-- Falcon Eye Logo Image -->
+                        <img class="brand-logo" src="/static/falconeye_Logo.png" alt="FalconEye Logo">
+                    </div>
+                    <div class="brand-text">
+                        <h1>FalconEye</h1>
+                        <span>Threat Intelligence</span>
+                    </div>
+                </div>
+                <!-- Premium Theme Toggle -->
+                <button class="theme-toggle-btn" id="theme-toggle" title="Toggle Light/Dark Theme">
+                    <svg class="theme-icon sun-icon hidden" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    <svg class="theme-icon moon-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+            </div>
+
+            <!-- Sleek Nav Links -->
+            <nav class="sidebar-nav">
+                <button class="nav-btn active" data-tab="dashboard" id="btn-tab-dashboard">
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="nav-icon"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+                    Dashboard
+                </button>
+                <button class="nav-btn" data-tab="ticker" id="btn-tab-ticker">
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="nav-icon"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                    Live Ticker
+                </button>
+                <button class="nav-btn" data-tab="simulator" id="btn-tab-simulator">
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="nav-icon"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    Simulator
+                </button>
+                <button class="nav-btn" data-tab="models" id="btn-tab-models">
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="nav-icon"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                    User Thresholds
+                </button>
+                <button class="nav-btn" data-tab="theory" id="btn-tab-theory">
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="nav-icon"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                    How It Works
+                </button>
+            </nav>
+
+            <!-- Indicators Status Panel -->
+            <div class="sidebar-status-panel">
+                <div class="panel-header">System Health</div>
+                
+                <div class="status-item">
+                    <span class="status-label">Database Connection</span>
+                    <div class="status-indicator-wrapper">
+                        <span class="status-value text-glow-green" id="db-status-text">Connected</span>
+                        <span class="pulse-beacon beacon-green" id="db-status-beacon"></span>
+                    </div>
+                </div>
+
+                <div class="status-item">
+                    <span class="status-label">Autoencoder Engine</span>
+                    <div class="status-indicator-wrapper">
+                        <span class="status-value text-glow-olive">Active</span>
+                        <span class="pulse-beacon beacon-olive"></span>
+                    </div>
+                </div>
+
+                <div class="status-item">
+                    <span class="status-label">Async Worker</span>
+                    <div class="status-indicator-wrapper">
+                        <span class="status-value text-glow-cyan" id="worker-status-text">Scanning</span>
+                        <span class="pulse-beacon beacon-cyan animate-pulse"></span>
+                    </div>
+                </div>
+
+                <div class="status-item font-xs flex-col" style="margin-top: 4px;">
+                    <div class="flex justify-between w-full">
+                        <span class="status-label">Engine Mode:</span>
+                        <span class="status-value font-bold text-cyan" id="engine-mode-tag">LIVE API</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Info Card -->
+            <div class="sidebar-footer" style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                <div class="footer-avatar">SU</div>
+                <div class="footer-info" style="flex: 1; min-width: 0;">
+                    <div class="profile-name" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">SecBank Admin</div>
+                    <div class="profile-email" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">falconeye@securebank.com</div>
+                </div>
+                <button class="logout-icon-btn" id="btn-sidebar-logout" title="Sign Out & Lock Threat Center">
+                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Dashboard Tab Pane -->
+            <div class="tab-pane active" id="pane-dashboard">
+                <header class="content-header">
+                    <div class="header-title">
+                        <h2>Anomaly Detection Telemetry</h2>
+                        <p>Real-time machine learning threat intelligence powered by TensorFlow Autoencoder nodes</p>
+                    </div>
+                    <div class="header-actions">
+                        <span class="live-indicator-badge">
+                            <span class="pulse-beacon beacon-red animate-pulse"></span>
+                            INGESTION ACTIVE
+                        </span>
+                        <button class="btn btn-primary btn-icon" id="btn-trigger-simulator-shortcut">
+                            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                            New Ingest
+                        </button>
+                    </div>
+                </header>
+
+                <!-- Premium Stats Grid -->
+                <section class="kpi-grid">
+                    <div class="kpi-card glass hover-glow-cyan" id="kpi-card-txns">
+                        <div class="kpi-icon-wrapper cyan">
+                            <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                        </div>
+                        <div class="kpi-content">
+                            <span class="kpi-title">Total Transactions</span>
+                            <span class="kpi-value text-glow-cyan" id="kpi-total-txns">0</span>
+                            <span class="kpi-meta text-cyan">▲ Inbound stream</span>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card glass hover-glow-red" id="kpi-card-anomalies">
+                        <div class="kpi-icon-wrapper red">
+                            <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        </div>
+                        <div class="kpi-content">
+                            <span class="kpi-title">Flagged Threats</span>
+                            <span class="kpi-value text-glow-red" id="kpi-total-anomalies">0</span>
+                            <span class="kpi-meta text-red">● Reconstruction anomalies</span>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card glass hover-glow-olive" id="kpi-card-rate">
+                        <div class="kpi-icon-wrapper olive">
+                            <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10M12 20V4M6 20v-6"></path></svg>
+                        </div>
+                        <div class="kpi-content">
+                            <span class="kpi-title">Anomaly Rate</span>
+                            <span class="kpi-value text-glow-olive" id="kpi-anomaly-rate">0.00%</span>
+                            <span class="kpi-meta text-olive">Threshold (Mean + 3k)</span>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card glass hover-glow-gold" id="kpi-card-volume">
+                        <div class="kpi-icon-wrapper gold">
+                            <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                        </div>
+                        <div class="kpi-content">
+                            <span class="kpi-title">Ingested Volume</span>
+                            <span class="kpi-value text-glow-gold" id="kpi-total-volume">$0K</span>
+                            <span class="kpi-meta text-gold">Total ledger volume</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- State-of-the-Art Interactive Charts Section -->
+                <section class="charts-row">
+                    <div class="chart-container-wrapper glass grid-2-3">
+                        <div class="chart-header">
+                            <div class="chart-title">
+                                <h3>Anomaly Rate Over Time</h3>
+                                <p>Reconstruction error anomalies versus daily transaction count</p>
+                            </div>
+                            <div class="chart-legend">
+                                <span class="legend-item"><span class="legend-dot cyan"></span> Inbound</span>
+                                <span class="legend-item"><span class="legend-dot crimson"></span> Threats</span>
+                            </div>
+                        </div>
+                        <div class="chart-body">
+                            <canvas id="chart-anomaly-trend"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-container-wrapper glass grid-1-3">
+                        <div class="chart-header">
+                            <div class="chart-title">
+                                <h3>Risk Distribution</h3>
+                                <p>Proportion of low, medium, and high-risk triggers</p>
+                            </div>
+                        </div>
+                        <div class="chart-body flex justify-center align-center">
+                            <div class="donut-chart-box">
+                                <canvas id="chart-risk-distribution"></canvas>
+                                <div class="donut-center-text">
+                                    <span class="donut-num" id="donut-center-count">0</span>
+                                    <span class="donut-lbl">Threats</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- High-Contrast Live Alerts Ingestion Stream -->
+                <section class="live-alerts-section glass">
+                    <div class="section-title-wrapper">
+                        <h3>Critical Ingestion Alerts Feed</h3>
+                        <span>Auto-refreshing real-time detection telemetry</span>
+                    </div>
+                    <div class="alerts-feed-wrapper" id="alerts-feed">
+                        <div class="alerts-empty-state">
+                            <svg viewBox="0 0 24 24" width="36" height="36" stroke="currentColor" stroke-width="1.5" fill="none"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4M12 16h.01"></path></svg>
+                            <p>No critical transactions detected in this ingestion window.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Live Ticker Tab Pane -->
+            <div class="tab-pane" id="pane-ticker">
+                <header class="content-header">
+                    <div class="header-title">
+                        <h2>Real-Time Ledger Ticker</h2>
+                        <p>Complete historical log of transaction traffic parsed through the autoencoder model</p>
+                    </div>
+                    <div class="header-actions">
+                        <div class="toggle-container">
+                            <span class="toggle-label font-xs">Simulated Stream Traffic:</span>
+                            <label class="switch">
+                                <input type="checkbox" id="toggle-mock-stream" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <button class="btn btn-secondary btn-icon" id="btn-clear-ticker">
+                            Clear Ingest
+                        </button>
+                    </div>
+                </header>
+
+                <div class="table-filter-section">
+                    <div class="search-wrapper">
+                        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        <input type="text" id="ticker-search-input" placeholder="Search by Txn ID, User ID, Type, Channel..." class="search-input">
+                    </div>
+                    <div class="flex" style="gap: 8px;">
+                        <button class="btn btn-secondary" id="btn-filter-all" style="background-color: var(--brand-primary-light); color: var(--brand-primary); border-color: rgba(37,99,235,0.15);">All Log</button>
+                        <button class="btn btn-secondary" id="btn-filter-anomalies">Anomalies</button>
+                    </div>
+                </div>
+
+                <div class="table-scroll-container glass">
+                    <table class="transaction-table" id="ticker-table">
+                        <thead>
+                            <tr>
+                                <th>TXN ID</th>
+                                <th>USER ID</th>
+                                <th>AMOUNT</th>
+                                <th>TYPE</th>
+                                <th>CHANNEL</th>
+                                <th>INGESTION TIMESTAMP</th>
+                                <th>ERROR SCORE</th>
+                                <th>VERDICT</th>
+                                <th>ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ticker-tbody">
+                            <!-- Injected by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Transaction Simulator Tab Pane -->
+            <div class="tab-pane" id="pane-simulator" style="position: relative;">
+                <header class="content-header">
+                    <div class="header-title" style="display: flex; align-items: center; gap: 12px;">
+                        <h2>Anomaly Scoring Simulator</h2>
+                        <span id="simulator-clearance-badge" class="badge badge-gold" style="font-weight: 700; font-size: 10px; padding: 4px 10px; border-radius: 12px; height: fit-content; text-transform: uppercase;">Demo Mode</span>
+                    </div>
+                </header>
+
+                <div class="simulator-layout">
+                    <div class="simulator-form glass">
+                        <div class="simulator-form-title">Transaction Parameter Setup</div>
+                        <form id="sim-form" class="sim-form-grid">
+                            <div class="form-group">
+                                <label class="form-label" for="sim-user-id">User Account ID</label>
+                                <input type="number" id="sim-user-id" class="form-input" min="1" value="1" required>
+                                <span class="font-xs" style="color: var(--color-text-muted);">Simulate user profiles (IDs 1-50 have custom standard envelopes)</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="sim-amount">Transaction Amount ($)</label>
+                                <input type="number" id="sim-amount" class="form-input" min="1" step="0.01" value="250.00" required>
+                                <span class="font-xs" style="color: var(--color-text-muted);">Larger values relative to user average increase reconstruction error</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="sim-txn-type">Transaction Type</label>
+                                <select id="sim-txn-type" class="form-input" style="height: 40px;" required>
+                                    <option value="debit" selected>Debit (ATM / POS Outflow)</option>
+                                    <option value="credit">Credit (Deposit Inflow)</option>
+                                    <option value="transfer">Transfer (Wire / ACH Outflow)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="sim-channel">Access Channel</label>
+                                <select id="sim-channel" class="form-input" style="height: 40px;" required>
+                                    <option value="online" selected>Online Interface</option>
+                                    <option value="mobile">Mobile Application</option>
+                                    <option value="atm">Physical ATM Node</option>
+                                    <option value="pos">Card Merchant Terminal</option>
+                                </select>
+                            </div>
+
+                            <div class="form-actions" style="margin-top: 12px;">
+                                <button type="submit" class="btn btn-primary" id="btn-submit-simulation" style="width: 100%; justify-content: center; height: 42px;">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" style="margin-right: 4px;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                                    Score Ingest Stream
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="simulator-results-panel glass" id="sim-results-panel">
+                        <div class="results-empty-state" id="sim-results-empty">
+                            <svg viewBox="0 0 24 24" width="48" height="48" stroke="currentColor" stroke-width="1.5" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                            <h4>Scoring Telemetry Empty</h4>
+                            <p>Inject a transaction on the left to review autoencoder error ratios, neural thresholds, and alerts triggers.</p>
+                        </div>
+
+                        <!-- Scored Result Report (hidden by default) -->
+                        <div class="results-report-wrapper hidden" id="sim-results-content">
+                            <div class="report-header">
+                                <div>
+                                    <h4>Neural Evaluation Verdict</h4>
+                                    <span class="report-id" id="report-txn-id">TXN ID: #10000</span>
+                                </div>
+                                <span class="risk-badge" id="report-verdict-badge">SAFE</span>
+                            </div>
+
+                            <div class="reconstruction-error-viz-box">
+                                <div class="metric-block">
+                                    <span class="lbl">Reconstruction Error</span>
+                                    <span class="val text-glow-cyan" id="report-score-val">0.0000</span>
+                                </div>
+                                <div class="metric-divider">vs</div>
+                                <div class="metric-block">
+                                    <span class="lbl">Dynamic Threshold</span>
+                                    <span class="val text-glow-olive" id="report-threshold-val">0.0000</span>
+                                </div>
+                            </div>
+
+                            <div class="error-progress-container">
+                                <div class="progress-bar-labels">
+                                    <span>Error Score Proximity</span>
+                                    <span id="report-ratio-val">0% of Threshold</span>
+                                </div>
+                                <div class="progress-bar-track">
+                                    <div class="progress-bar-fill fill-cyan" id="report-progress-bar"></div>
+                                    <div class="threshold-marker-line" id="report-threshold-marker">
+                                        <span class="marker-label">Threshold</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="report-details-grid">
+                                <div class="detail-cell">
+                                    <span class="label">User Profile ID</span>
+                                    <span class="value" id="report-user-id">1</span>
+                                </div>
+                                <div class="detail-cell">
+                                    <span class="label">Amount Scored</span>
+                                    <span class="value" id="report-amount">$0.00</span>
+                                </div>
+                                <div class="detail-cell">
+                                    <span class="label">Ingest Type</span>
+                                    <span class="value" style="text-transform: capitalize;" id="report-type">debit</span>
+                                </div>
+                                <div class="detail-cell">
+                                    <span class="label">Access Channel</span>
+                                    <span class="value" style="text-transform: capitalize;" id="report-channel">online</span>
+                                </div>
+                                <div class="detail-cell" style="grid-column: span 2;">
+                                    <span class="label">Evaluation Source</span>
+                                    <span class="value" style="color: var(--brand-primary);" id="report-threshold-type">USER ENVELOPE</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Thresholds Tab Pane -->
+            <div class="tab-pane" id="pane-models">
+                <header class="content-header">
+                    <div class="header-title">
+                        <h2>User Standard Deviation Envelopes</h2>
+                        <p>Review autoencoder calculations, user historical variances, and live calculated triggers</p>
+                    </div>
+                </header>
+
+                <div class="thresholds-layout">
+                    <div class="global-thresholds-panel glass">
+                        <h3>Autoencoder Global Telemetry limits</h3>
+                        <div class="parameter-grid">
+                            <div class="param-card">
+                                <span class="param-lbl">Global Fallback Limit</span>
+                                <span class="param-val text-glow-cyan" id="global-threshold-val">1.1294</span>
+                                <span class="param-desc">Default cutoff error threshold</span>
+                            </div>
+                            <div class="param-card">
+                                <span class="param-lbl">Deviation Coefficient (K)</span>
+                                <span class="param-val text-glow-olive">3.00</span>
+                                <span class="param-desc">Threshold = Mean + K * StdDev</span>
+                            </div>
+                            <div class="param-card">
+                                <span class="param-lbl">Min Historical Samples</span>
+                                <span class="param-val text-glow-pink">10</span>
+                                <span class="param-desc">Ingests needed for custom envelope</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="user-thresholds-table-wrapper glass">
+                        <div class="table-actions-header">
+                            <h3>User-Specific Neural Envelopes</h3>
+                            <input type="text" id="user-search-input" placeholder="Search by User ID..." class="search-input" style="max-width: 250px;">
+                        </div>
+                        <div class="table-scroll-container">
+                            <table class="transaction-table" id="thresholds-table">
+                                <thead>
+                                    <tr>
+                                        <th>USER ACCOUNT ID</th>
+                                        <th>MEAN RECONSTRUCTION ERROR</th>
+                                        <th>RECONSTRUCTION STD DEVIATION</th>
+                                        <th>SAMPLES PARSED</th>
+                                        <th>CALCULATED CRITICAL THRESHOLD</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="thresholds-tbody">
+                                    <!-- Populated dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- How It Works Tab Pane -->
+            <div class="tab-pane" id="pane-theory">
+                <header class="content-header">
+                    <div class="header-title">
+                        <h2>Autoencoder Detection Theory</h2>
+                        <p>How the unsupervised deep learning neural network identifies banking transaction anomalies</p>
+                    </div>
+                </header>
+
+                <div class="theory-layout">
+                    <!-- Intro Summary Card -->
+                    <div class="theory-intro-card glass">
+                        <div class="intro-icon-box">
+                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2.5" fill="none"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                        </div>
+                        <div class="intro-text">
+                            <h3>Unsupervised Reconstruction Telemetry</h3>
+                            <p>This system uses an unsupervised autoencoder neural network trained exclusively on historical healthy transaction data. The model learns to compress ledger coordinates into a low-dimensional latent space bottleneck and reconstruct them. Transactions that deviate significantly from these learned normal patterns produce high reconstruction errors and are automatically flagged based on their Mean Squared Error (MSE).</p>
+                        </div>
+                    </div>
+
+                    <!-- Parameter Specs Cards Grid -->
+                    <div class="theory-spec-grid">
+                        <div class="spec-card glass">
+                            <span class="spec-lbl">Model Architecture</span>
+                            <span class="spec-val">Autoencoder</span>
+                            <span class="spec-desc">Unsupervised deep learning</span>
+                        </div>
+                        <div class="spec-card glass">
+                            <span class="spec-lbl">Error Metric</span>
+                            <span class="spec-val">MSE</span>
+                            <span class="spec-desc">Mean Squared Error</span>
+                        </div>
+                        <div class="spec-card glass">
+                            <span class="spec-lbl">Scoring Threshold</span>
+                            <span class="spec-val" id="theory-threshold-val">0.0450</span>
+                            <span class="spec-desc">Max of p99 and mean + 3σ</span>
+                        </div>
+                        <div class="spec-card glass">
+                            <span class="spec-lbl">Ingestion System</span>
+                            <span class="spec-val">Async Queue</span>
+                            <span class="spec-desc">Scoring thread + worker</span>
+                        </div>
+                    </div>
+
+                    <!-- Deep Dive Timeline + Architecture Section -->
+                    <div class="theory-split-grid">
+                        <!-- Left: 3-step Timeline -->
+                        <div class="theory-timeline">
+                            <div class="timeline-step glass">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h4>Train on normal transactions</h4>
+                                    <p>The neural network trains exclusively on historical transactions considered normal. It learns optimal weights to compress and reconstruct core features: amount, type, channel, and 30-day user rolling envelopes.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-step glass">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h4>Score each new transaction</h4>
+                                    <p>When a new ledger ingest arrives, the encoder compresses features into a latent bottleneck, and the decoder reconstructs them. Normal transactions reconstruct with low error; anomalous ones do not.</p>
+                                </div>
+                            </div>
+
+                            <div class="timeline-step glass">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h4>Flag if error exceeds threshold</h4>
+                                    <p>If the calculated Mean Squared Error (MSE) exceeds the dynamic limit, an alert is triggered immediately. Transactions are written to the alerts feed with a critical threat index.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right: Interactive SVG Neural Net Diagram -->
+                        <div class="theory-architecture-panel glass">
+                            <h4>Autoencoder Neural Network</h4>
+                            <div class="architecture-container">
+                                <!-- Breathtaking interactive SVG neural network diagram -->
+                                <svg class="neural-network-svg" id="neural-net-svg" viewBox="0 0 600 360" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Neural Connections (wires) -->
+                                    <g id="neural-connections"></g>
+                                    
+                                    <!-- Neural Nodes -->
+                                    <g id="neural-nodes"></g>
+                                </svg>
+                                
+                                <div class="architecture-legend">
+                                    <span class="arch-lbl input-lbl" style="left: 6%">Input</span>
+                                    <span class="arch-lbl encoder-lbl" style="left: 24%">Encoder</span>
+                                    <span class="arch-lbl latent-lbl" style="left: 48%; color: var(--brand-primary); font-weight: 750;">Latent</span>
+                                    <span class="arch-lbl decoder-lbl" style="left: 70%">Decoder</span>
+                                    <span class="arch-lbl output-lbl" style="left: 88%">Output</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Script Logic -->
+    <script src="https://unpkg.com/webgl-fluid"></script>
+    <script src="/static/app.js"></script>
+</body>
+</html>
