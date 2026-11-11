@@ -209,7 +209,7 @@ def get_dashboard_stats(conn) -> dict:
         anomaly_rate = (total_anomalies / total_txns * 100) if total_txns > 0 else 0.0
 
         # Total amount in last 30 days
-        cursor.execute("SELECT SUM(amount) AS total_volume FROM transactions WHERE created_at >= NOW() - INTERVAL 30 DAY")
+        cursor.execute("SELECT COALESCE(SUM(amount), 0) AS total_volume FROM transactions")
         total_volume = cursor.fetchone()["total_volume"] or 0.0
 
         return {
